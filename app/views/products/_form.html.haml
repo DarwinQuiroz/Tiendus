@@ -1,0 +1,31 @@
+= form_for @product,builder: BootstrapFormBuilder do |f|
+  = f.errors
+  = f.text_field :name
+  = f.text_field :pricing
+  = f.text_area :description
+  = f.file_field :avatar
+  = f.submit "Guardar"
+  
+  
+  -# - if @product.errors.any?
+  -#   #error_explanation
+  -#     %h2= "#{pluralize(@product.errors.count, "error")} prohibited this product from being saved:"
+  -#     %ul
+  -#       - @product.errors.full_messages.each do |message|
+  -#         %li= message
+
+ 
+  -# .field
+  -#   = f.label :name
+    
+  -# .field
+  -#   = f.label :pricing
+  -#   = f.text_field :pricing
+  -# .field
+  -#   = f.label :description
+  -#   = f.text_area :description
+  -# .field
+  -#   = f.label :avatar
+  -#   = f.file_field :avatar
+  -# .actions
+  -#   = f.submit 'Save'

@@ -1,0 +1,31 @@
+.col-md-3.no-padding.inline-block.in-top
+    %nav.medium
+        .teal.white-text.col-md-12
+            Admin
+
+.col-md-9.inline-block
+    .card.large-padding
+        .col-md-9.inline-block
+            %h2= @product.name
+        .col-md-3.inline-block
+            %p.big.no-margin.red-text 1100 USD
+        %nav.top-space
+            =link_to product_path(id: @product.id, client: true), class:"other-grey large-padding text-center col-md-4 inline-block" do
+                Ver como cliente
+            =link_to edit_product_path(@product), class:"other-grey large-padding text-center col-md-4 inline-block" do
+                Editar Producto
+            =link_to @product, method: :delete, data: { confirm: '¿Realmente desea eliminar este producto?' }, class:"other-grey large-padding text-center col-md-4 inline-block" do
+                Eliminar Producto
+    
+        %div
+            %h3.grey-text Archivos
+            %ol
+                -@product.attachments.each do |attachment|
+                    %li.large-padding.medium.grey-text.other-grey
+                        -# .col-xs-11.inline-block= attachment.archivo_file_name
+                        .col-xs-11.inline-block= link_to attachment.archivo_file_name, attachment
+                        .col-xs-1.inline-block
+                            -# %i.mdi-content-clear
+                            =link_to attachment, method: :delete, data: { confirm: '¿Desea eliminar este archivo?' }, class:"red-text" do
+                                X
+            = render "attachments/form", product_id: @product.id
