@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :in_shopping_carts, only: [:create, :destroy]
 
   post "/emails/create", as: :create_email
+
+  get "/carrito", to: "shopping_cart#show"
   
   authenticated :user do
   	root 'welcome#index'
