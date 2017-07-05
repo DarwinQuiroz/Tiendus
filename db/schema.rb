@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170705012012) do
+ActiveRecord::Schema.define(version: 20170705013244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 20170705012012) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.index ["product_id"], name: "index_attachments_on_product_id", using: :btree
+  end
+
+  create_table "in_shopping_carts", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "shopping_cart_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["product_id"], name: "index_in_shopping_carts_on_product_id", using: :btree
+    t.index ["shopping_cart_id"], name: "index_in_shopping_carts_on_shopping_cart_id", using: :btree
   end
 
   create_table "my_emails", force: :cascade do |t|
@@ -49,7 +58,7 @@ ActiveRecord::Schema.define(version: 20170705012012) do
     t.integer  "user_id"
     t.string   "name"
     t.decimal  "pricing",             precision: 10, scale: 2
-    t.text     "description"
+    t.text     "descripction"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -57,6 +66,13 @@ ActiveRecord::Schema.define(version: 20170705012012) do
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
     t.index ["user_id"], name: "index_products_on_user_id", using: :btree
+  end
+
+  create_table "shopping_carts", force: :cascade do |t|
+    t.integer  "status",     default: 0
+    t.string   "ip"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -77,5 +93,7 @@ ActiveRecord::Schema.define(version: 20170705012012) do
   end
 
   add_foreign_key "attachments", "products"
+  add_foreign_key "in_shopping_carts", "products"
+  add_foreign_key "in_shopping_carts", "shopping_carts"
   add_foreign_key "products", "users"
 end

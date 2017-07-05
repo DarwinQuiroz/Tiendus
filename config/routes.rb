@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   
+  devise_for :users
   resources :attachments, only: [:new, :create, :destroy, :show]
   resources :products
-  devise_for :users
+  resources :in_shopping_carts, only: [:create, :destroy]
 
   post "/emails/create", as: :create_email
   
