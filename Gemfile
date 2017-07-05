@@ -25,6 +25,7 @@ gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'bootstrap-material-design'
 gem 'paperclip', '~> 4.2'
+gem 'paypal-sdk-rest'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -46,6 +47,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'rspec-rails',"~>  3.5.0.beta1"
   gem "factory_girl_rails", "~> 4.0"
+  gem 'annotate'
 end
 
 group :development do
