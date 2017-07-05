@@ -20,4 +20,8 @@
                 =image_tag "tiendus.png", height:"25px"
             %li.col-md-4.inline-block.tall-padding
                 =link_to carrito_path, class:"white-text" do
+                    %i.mdi-action-shopping-cart
                     Mi carrito
+                    (
+                    =@shopping_cart.products.count
+                    )
