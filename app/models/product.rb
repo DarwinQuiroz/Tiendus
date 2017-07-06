@@ -24,4 +24,10 @@ class Product < ApplicationRecord
 
   has_attached_file :avatar,styles: {thumb: "100x100",medium:"300x300"},default_url:"/images/:style/missing.jpg"
   validates_attachment_content_type :avatar,content_type: /\Aimage\/.*\Z/
+
+  def paypal_form
+    price = pricing.to_s + ".00"
+    pricing_total = price.to_f / 100
+    { name: name, sku: :item, price: pricing_total, currency: "USD", quantity: 1 }
+  end
 end

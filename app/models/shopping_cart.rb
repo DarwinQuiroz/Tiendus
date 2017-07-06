@@ -17,6 +17,18 @@ class ShoppingCart < ApplicationRecord
 
     #enum status: {payed: 1, default: 0}
 
+    # {
+    # name: "DEMO", 
+    # sku: :item, 
+    # price: self.shopping_cart.total, 
+    # currency: "USD", 
+    # quantity: 1
+    # }
+    def items
+        self.products.map{ |product| product.paypal_form }
+    end
+
+    
     def total
         total = products.sum(:pricing).to_s + ".0"
         total.to_f / 100
