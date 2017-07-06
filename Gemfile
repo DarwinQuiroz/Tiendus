@@ -26,6 +26,7 @@ gem 'bootstrap-sass'
 gem 'bootstrap-material-design'
 gem 'paperclip', '~> 4.2'
 gem 'paypal-sdk-rest'
+gem 'aasm'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

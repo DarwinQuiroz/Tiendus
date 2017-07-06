@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170706002401) do
+ActiveRecord::Schema.define(version: 20170706152313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,18 +47,20 @@ ActiveRecord::Schema.define(version: 20170706002401) do
     t.string   "email"
     t.string   "ip"
     t.string   "status"
-    t.decimal  "fee",        precision: 6, scale: 2
+    t.decimal  "fee",              precision: 6, scale: 2
     t.string   "paypal_id"
-    t.decimal  "total",      precision: 9, scale: 2
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.decimal  "total",            precision: 9, scale: 2
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.integer  "shopping_cart_id"
+    t.index ["shopping_cart_id"], name: "index_my_payments_on_shopping_cart_id", using: :btree
   end
 
   create_table "products", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
     t.integer  "pricing"
-    t.text     "descripction"
+    t.text     "description"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -69,10 +71,10 @@ ActiveRecord::Schema.define(version: 20170706002401) do
   end
 
   create_table "shopping_carts", force: :cascade do |t|
-    t.integer  "status",     default: 0
+    t.string   "status"
     t.string   "ip"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
