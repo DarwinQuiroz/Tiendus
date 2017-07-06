@@ -5,7 +5,7 @@
 #  id                  :integer          not null, primary key
 #  user_id             :integer
 #  name                :string
-#  pricing             :decimal(10, 2)
+#  pricing             :integer
 #  description         :text
 #  avatar_file_name    :string
 #  avatar_content_type :string

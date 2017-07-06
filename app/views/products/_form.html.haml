@@ -1,6 +1,9 @@
 = form_for @product,builder: BootstrapFormBuilder do |f|
   = f.errors
   = f.text_field :name
+  %small.bold.red-text Coloca el precio en centavos de dólar*
+  %br
+  %br
   = f.text_field :pricing
   = f.text_area :description
   = f.file_field :avatar

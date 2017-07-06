@@ -9,14 +9,15 @@
   </head>
 
   <body>
-    <div style="<%= 'display: none;' if alert.nil? && notice.nil? %>">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+    <div style="<%= "display:none;" if alert.nil? && notice.nil? %>" class="blue white-text large-padding bold text-center">
+      <p class="no-padding no-margin inline-block"><%= notice %><%= alert %></p>
     </div>
 
 	  <%= render  "partials/nav" %>
 
-    <%= yield %>
+    <div class="col-md-11 no-float center-block">
+      <%= yield %>
+    </div>  
     
   </body>
 </html>

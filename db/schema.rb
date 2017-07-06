@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170705013244) do
+ActiveRecord::Schema.define(version: 20170706002401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,14 +57,14 @@ ActiveRecord::Schema.define(version: 20170705013244) do
   create_table "products", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
-    t.decimal  "pricing",             precision: 10, scale: 2
+    t.integer  "pricing"
     t.text     "descripction"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.index ["user_id"], name: "index_products_on_user_id", using: :btree
   end
 

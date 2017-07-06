@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   
   devise_for :users
-  resources :attachments, only: [:new, :create, :destroy, :show]
+  resources :attachments, only: [:new, :create, :destroy]
   resources :products
   resources :in_shopping_carts, only: [:create, :destroy]
 
   post "/emails/create", as: :create_email
 
-  get "/carrito", to: "shopping_cart#show"
+  get "/carrito", to: "shopping_carts#show"
+  get "/add/:product_id", as: :add_to_cart, to: "in_shopping_carts#create"
   
   authenticated :user do
   	root 'welcome#index'
