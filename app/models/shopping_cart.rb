@@ -32,7 +32,7 @@ class ShoppingCart < ApplicationRecord
     def total
         total = products.sum(:pricing).to_s + ".0"
         total.to_f / 100
-        # total 
+        # products.sum(:pricing)
     end
 
     aasm column: "status" do
