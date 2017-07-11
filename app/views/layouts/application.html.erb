@@ -11,6 +11,7 @@
   <body>
     <div style="<%= "display:none;" if alert.nil? && notice.nil? %>" class="blue white-text large-padding bold text-center">
       <p class="no-padding no-margin inline-block"><%= notice %><%= alert %></p>
+      <span class="pull-right close-parent">X</span>
     </div>
 
 	  <%= render  "partials/nav" %>

@@ -18,6 +18,9 @@
 class Product < ApplicationRecord
   belongs_to :user
   has_many :attachments
+  has_many :in_shopping_carts
+  has_one :shopping_cart, through: :in_shopping_carts
+  has_many :my_payments, through: :shopping_cart
   
   validates_presence_of :user, :name, :pricing
   validates :pricing, numericality: { greater_than: 0 }
@@ -29,5 +32,13 @@ class Product < ApplicationRecord
     price = pricing.to_s + ".00"
     pricing_total = price.to_f / 100
     { name: name, sku: :item, price: pricing_total, currency: "USD", quantity: 1 }
+  end
+
+  def sale
+    my_payments.payed
+  end
+
+  def sales_total
+    my_payments.payed.count * self.pricing
   end
 end

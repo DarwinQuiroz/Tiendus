@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   get "/download/:id", to: "links#download"
   get "/download/:id/attachment/attachment_id", to: "links#download_attachment", as: :download_attachment
   get "/invalid", to: "welcome#unregistered"
-  
+  get "/orders", to: "orders#index"
+
   authenticated :user do
   	root 'welcome#index'
   end
