@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170707154746) do
+ActiveRecord::Schema.define(version: 20170711155207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,16 @@ ActiveRecord::Schema.define(version: 20170707154746) do
     t.datetime "updated_at",       null: false
     t.index ["product_id"], name: "index_in_shopping_carts_on_product_id", using: :btree
     t.index ["shopping_cart_id"], name: "index_in_shopping_carts_on_shopping_cart_id", using: :btree
+  end
+
+  create_table "link_attachments", force: :cascade do |t|
+    t.integer  "link_id"
+    t.integer  "attachment_id"
+    t.datetime "expiration_date"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["attachment_id"], name: "index_link_attachments_on_attachment_id", using: :btree
+    t.index ["link_id"], name: "index_link_attachments_on_link_id", using: :btree
   end
 
   create_table "links", force: :cascade do |t|
@@ -109,6 +119,8 @@ ActiveRecord::Schema.define(version: 20170707154746) do
   add_foreign_key "attachments", "products"
   add_foreign_key "in_shopping_carts", "products"
   add_foreign_key "in_shopping_carts", "shopping_carts"
+  add_foreign_key "link_attachments", "attachments"
+  add_foreign_key "link_attachments", "links"
   add_foreign_key "links", "products"
   add_foreign_key "products", "users"
 end

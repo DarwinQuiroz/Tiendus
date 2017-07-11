@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   get "/add/:product_id", as: :add_to_cart, to: "in_shopping_carts#create"
   get "/checkout", to: "payments#checkout"
   get "/ok", to: "welcome#payment_success"
+  get "/download/:id", to: "links#download"
+  get "/download/:id/attachment/attachment_id", to: "links#download_attachment", as: :download_attachment
+  get "/invalid", to: "welcome#unregistered"
   
   authenticated :user do
   	root 'welcome#index'
