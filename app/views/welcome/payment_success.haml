@@ -15,5 +15,7 @@
                         %tr{id:"#{product.id}"}
                             %td= product.name
                             %td
+                                -pricing = (product.pricing).to_s + ".00"
+                                -pricing_total = pricing.to_f / 100
                                 $
-                                = product.pricing
+                                = pricing_total

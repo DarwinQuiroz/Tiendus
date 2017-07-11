@@ -1,7 +1,5 @@
 class PaymentsController < ApplicationController
   # include PayPal::SDK::REST
-
-
   def checkout
     @my_payment = MyPayment.find_by(paypal_id: params[:paymentId])
     
@@ -9,6 +7,9 @@ class PaymentsController < ApplicationController
       redirect_to "/carrito"
     else
       Stores::Paypal.checkout(params[:PayerID], params[:paymentId]) do 
+        
+        @my_payment.update(email: Stores::Paypal.get_email(params[:paymentId]))
+
         @my_payment.pay!
         redirect_to ok_path, notice: "Se proceso su pago con PayPal.!"
         return

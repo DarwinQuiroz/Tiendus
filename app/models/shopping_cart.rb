@@ -14,27 +14,9 @@ class ShoppingCart < ApplicationRecord
 
     has_many :products, through: :in_shopping_carts
     has_many :in_shopping_carts
+    has_many :my_payments
 
     #enum status: {payed: 1, default: 0}
-
-    # {
-    # name: "DEMO", 
-    # sku: :item, 
-    # price: self.shopping_cart.total, 
-    # currency: "USD", 
-    # quantity: 1
-    # }
-    def items
-        self.products.map{ |product| product.paypal_form }
-    end
-
-    
-    def total
-        total = products.sum(:pricing).to_s + ".0"
-        total.to_f / 100
-        # products.sum(:pricing)
-    end
-
     aasm column: "status" do
         state :created, initial: true
         state :payed
@@ -42,9 +24,33 @@ class ShoppingCart < ApplicationRecord
 
         event :pay do
             after do
-                # shopping_cart.pay!
+                self.generate_link()
             end
             transitions from: :created, to: :payed
+        end
+    end
+
+    def items
+        self.products.map{ |product| product.paypal_form }
+    end
+    
+    def total
+        total = products.sum(:pricing).to_s + ".0"
+        total.to_f / 100
+        # products.sum(:pricing)
+    end
+
+    def generate_link
+        self.products.each do |product|
+            Link.create(expiration_date: DateTime.now + 7.days, product: product, email: payment.email)
+        end
+    end
+
+    def payment
+        begin
+            my_payments.payed.first
+        rescue Exception => e
+            return nil
         end
     end
 end

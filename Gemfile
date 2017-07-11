@@ -50,6 +50,7 @@ group :development, :test do
   gem 'rspec-rails',"~>  3.5.0.beta1"
   gem "factory_girl_rails", "~> 4.0"
   gem 'annotate'
+  gem 'letter_opener'
 end
 
 group :development do
